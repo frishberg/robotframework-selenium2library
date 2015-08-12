@@ -14,7 +14,7 @@ def _run_on_failure_decorator(method, *args, **kwargs):
     try:
         return method(*args, **kwargs)
     except Exception, err:
-        if hasattr(self, '_run_on_failure') and not self._has_run_on_failure:
+        if hasattr(self, '_run_on_failure') and not (hasattr(self, '_has_run_on_failure') and self._has_run_on_failure):
             # If we're in an inner keyword, track the fact that we've already run on failure once
             self._has_run_on_failure = True
             self._run_on_failure()
